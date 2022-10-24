@@ -1,3 +1,5 @@
+#include "spherical-gear.h" // allows program to use our library
+
 void setup() {
   // put your setup code here, to run once:
 
