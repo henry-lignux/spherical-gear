@@ -20,8 +20,8 @@ class SphericalGear {
       double theta_speed = theta / time;
       double phi_speed = phi / time;
       for(int t = 0; t <= time; t+=TIME_ITERATION) { 
-	// iterates over 10 miliseconds 
-	servo1.write(angle1);
+	      // iterates over TIME_ITERATION miliseconds 
+	      servo1.write(angle1);
         servo2.write(angle2);
         angle1 += theta_speed*TIME_ITERATION;
         angle2 += phi_speed*TIME_ITERATION;
