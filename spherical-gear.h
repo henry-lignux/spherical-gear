@@ -1,8 +1,8 @@
 #include <Servo.h> // for the motor
 #include <cmath> // for the math
 #define TIME_ITERATION 10 // used for servo delay
-#define ANGLE_CONVERT_1 1.0
-#define ANGLE_CONVERT_2 1.0
+#define GEAR_RATIO_1 1.0
+#define GEAR_RATIO_2 1.0
 #define CLAW_DELAY 500 //used for claw delay when opening/closing claw
 class SphericalGear {
   private:
@@ -24,8 +24,8 @@ class SphericalGear {
       // radius is assumed to be 1
       // convert from spherical angle to motor angle
       // measured in degrees; from mr. nims's equation
-      double total_angle_change = acos( sin((angle1*ANGLE_CONVERT_1))*sin((angle1*ANGLE_CONVERT_1)+delta_theta)*cos((angle2*ANGLE_CONVERT_2)-delta_phi)
-       + cos((angle1*ANGLE_CONVERT_1))*cos((angle1*ANGLE_CONVERT_1)+delta_theta) );
+      double total_angle_change = acos( sin((angle1*GEAR_RATIO_1))*sin((angle1*GEAR_RATIO_1)+delta_theta)*cos((angle2*GEAR_RATIO_2)-delta_phi)
+       + cos((angle1*GEAR_RATIO_1))*cos((angle1*GEAR_RATIO_1)+delta_theta) );
       double time = total_angle_change / angular_speed; // in miliseconds
       //changed theta and phi speed to angle_1_speed and angle_2_speed
       double angle_1_speed = delta_theta / time;
@@ -35,8 +35,8 @@ class SphericalGear {
 	      servo1.write(angle1); // moves motor to theta
         servo2.write(angle2); // moves motor to phi
         //changed theta_speed and phi_speed to angle/ANGLE_CONVERT
-        angle1 += (angle_1_speed/ANGLE_CONVERT_1)*TIME_ITERATION;
-        angle2 += (angle_2_speed/ANGLE_CONVERT_2)*TIME_ITERATION;
+        angle1 += (angle_1_speed/GEAR_RATIO_1)*TIME_ITERATION;
+        angle2 += (angle_2_speed/GEAR_RATIO_2)*TIME_ITERATION;
         delay(TIME_ITERATION);
       }
     }
