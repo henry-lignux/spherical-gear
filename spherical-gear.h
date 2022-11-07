@@ -1,6 +1,7 @@
 #include <Servo.h> // for the motor
 #include <cmath> // for the math
 #define TIME_ITERATION 10 // used for servo delay
+#define CLAW_DELAY 500 //used for claw delay when opening/closing claw
 class SphericalGear {
   private:
     Servo servo1; // servo object for motor that changes theta
@@ -33,3 +34,14 @@ class SphericalGear {
       }
     }
 };
+void openclaw (Servo clawmotor, int open_angle) { 
+  //takes parameter servo and angle to which the claw should open
+  //turn the motor 45 degrees
+  clawmotor.write(open_angle);
+  delay(CLAW_DELAY);
+}
+void closeclaw (Servo clawmotor, int close_angle) {
+  //close the motor
+  clawmotor.write(close_angle);
+  delay(CLAW_DELAY);
+}
