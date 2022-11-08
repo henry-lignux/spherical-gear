@@ -39,6 +39,8 @@ class SphericalGear {
         angle2 += (angle_2_speed/GEAR_RATIO_2)*TIME_ITERATION;
         delay(TIME_ITERATION);
       }
+      angle1 = servo1.read();
+      angle2 = servo2.read();
     }
 };
 void openclaw (Servo clawmotor, int open_angle) { 
