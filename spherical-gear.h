@@ -54,3 +54,8 @@ void closeclaw (Servo clawmotor, int close_angle) {
   clawmotor.write(close_angle);
   delay(CLAW_DELAY);
 }
+
+
+void servo_move(double angular_speed, double delta_angle) {
+  
+}
