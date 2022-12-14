@@ -4,6 +4,7 @@
 #define GEAR_RATIO_1 1.0
 #define GEAR_RATIO_2 1.0
 #define CLAW_DELAY 500 //used for claw delay when opening/closing claw
+
 class SphericalGear {
   private:
     Servo servo1; // servo object for motor that changes theta
