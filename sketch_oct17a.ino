@@ -9,23 +9,29 @@ void setup() {
   SphericalGear sg(motor1_pin,motor2_pin);
   Servo claw_servo;
   claw_servo.attach(claw_pin); // initialize motor
+  int angle_openClaw = 30;
+  int angle_closeClaw = 10;
   //we want the arm to reach down, then grab with the claw, then pull back up
   //we might want to go back down and release the claw as well
   
+
+  // + angle is downwards, - angle is upwards
+  // arm starts at vertical 90 degrees, with claw closed
+  
   // open claw
-  openclaw(claw_servo, 45);
+  openclaw(claw_servo, angle_openClaw);
   // move arm down
-  move(0,0,30);
+  move(90,0,30);
   //close claw 
-  closeclaw(claw_servo, 0);
+  closeclaw(claw_servo, angle_closeClaw);
   //move arm up
-  move(80,0, 30);
+  move(-90,0, 30);
   //move arm down
-  move(0,0,30);
+  move(90,0,30);
   //open claw
-  openclaw(claw_servo, 45);
+  openclaw(claw_servo, angle_openClaw);
   //move arm up
-  move(80,0, 30);
+  move(-90,0, 30);
 }
 
 

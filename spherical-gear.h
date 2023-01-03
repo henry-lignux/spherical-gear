@@ -25,6 +25,8 @@ class SphericalGear {
       // radius is assumed to be 1
       // convert from spherical angle to motor angle
       // measured in degrees; from mr. nims's equation
+      //theta is the vertical angle
+      //phi is the horizontal angle
       double total_angle_change = acos( sin((angle1*GEAR_RATIO_1))*sin((angle1*GEAR_RATIO_1)+delta_theta)*cos((angle2*GEAR_RATIO_2)-delta_phi)
        + cos((angle1*GEAR_RATIO_1))*cos((angle1*GEAR_RATIO_1)+delta_theta) );
       double time = total_angle_change / angular_speed; // in miliseconds
