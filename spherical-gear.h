@@ -1,9 +1,10 @@
 #include <Servo.h> // for the motor
 #include <cmath> // for the math
 #define TIME_ITERATION 10 // used for servo delay
-#define GEAR_RATIO_1 1.0
-#define GEAR_RATIO_2 1.0
-#define MAGIC_NUMBER 0.722 //the coefficient we need to multiply to turn the servo properly
+#define GEAR_RATIO_1 1.143 // this gear is attached to the second gear
+#define GEAR_RATIO_2 1.0 // this motor attaches directly to the spherical gear
+#define MAGIC_NUMBER_RED 0.722 //the coefficient we need to multiply to turn the servo properly
+#define MAGIC_NUMBER_BLACK 1.047 
 #define CLAW_DELAY 500 //used for claw delay when opening/closing claw
 class SphericalGear {
   private:
