@@ -5,6 +5,7 @@
 #define GEAR_RATIO_2 1.0
 #define MAGIC_NUMBER 0.722 //the coefficient we need to multiply to turn the servo properly
 #define CLAW_DELAY 500 //used for claw delay when opening/closing claw
+
 class SphericalGear {
   private:
     Servo servo1; // servo object for motor that changes theta
@@ -25,8 +26,10 @@ class SphericalGear {
       // radius is assumed to be 1
       // convert from spherical angle to motor angle
       // measured in degrees; from mr. nims's equation
+      //theta is the vertical angle
+      //phi is the horizontal angle
       double total_angle_change = acos( sin((angle1*GEAR_RATIO_1))*sin((angle1*GEAR_RATIO_1)+delta_theta*MAGIC_NUMBER)*cos((angle2*GEAR_RATIO_2)-delta_phi*MAGIC_NUMBER)
-       + cos((angle1*GEAR_RATIO_1))*cos((angle1*GEAR_RATIO_1)+delta_theta*MAGIC_NUMBER) );
+       + cos((angle1*GEAR_RATIO_1))*cos((angle1*GEAR_RATIO_1)+delta_theta*MAGIC_NUMBER) 
       double time = total_angle_change / angular_speed; // in miliseconds
       //changed theta and phi speed to angle_1_speed and angle_2_speed
       double angle_1_speed = delta_theta*MAGIC_NUMBER / time;
