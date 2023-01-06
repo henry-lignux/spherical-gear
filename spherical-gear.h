@@ -1,9 +1,10 @@
 #include <Servo.h> // for the motor
 #include <cmath> // for the math
 #define TIME_ITERATION 10 // used for servo delay
-#define GEAR_RATIO_1 1.0
-#define GEAR_RATIO_2 1.0
-#define MAGIC_NUMBER 0.722 //the coefficient we need to multiply to turn the servo properly
+#define GEAR_RATIO_1 1.143 // this gear is attached to the second gear
+#define GEAR_RATIO_2 1.0 // this motor attaches directly to the spherical gear
+#define MAGIC_NUMBER_RED 0.722 //the coefficient we need to multiply to turn the servo properly
+#define MAGIC_NUMBER_BLACK 1.047 
 #define CLAW_DELAY 500 //used for claw delay when opening/closing claw
 
 class SphericalGear {
@@ -28,12 +29,12 @@ class SphericalGear {
       // measured in degrees; from mr. nims's equation
       //theta is the vertical angle
       //phi is the horizontal angle
-      double total_angle_change = acos( sin((angle1*GEAR_RATIO_1))*sin((angle1*GEAR_RATIO_1)+delta_theta*MAGIC_NUMBER)*cos((angle2*GEAR_RATIO_2)-delta_phi*MAGIC_NUMBER)
-       + cos((angle1*GEAR_RATIO_1))*cos((angle1*GEAR_RATIO_1)+delta_theta*MAGIC_NUMBER) 
+       double total_angle_change = acos( sin((angle1*GEAR_RATIO_1))*sin((angle1*GEAR_RATIO_1)+delta_theta*MAGIC_NUMBER_RED)*cos((angle2*GEAR_RATIO_2)-delta_phi*MAGIC_NUMBER_RED)
+       + cos((angle1*GEAR_RATIO_1))*cos((angle1*GEAR_RATIO_1)+delta_theta*MAGIC_NUMBER_RED) );
       double time = total_angle_change / angular_speed; // in miliseconds
       //changed theta and phi speed to angle_1_speed and angle_2_speed
-      double angle_1_speed = delta_theta*MAGIC_NUMBER / time;
-      double angle_2_speed = delta_phi*MAGIC_NUMBER / time;
+      double angle_1_speed = delta_theta*MAGIC_NUMBER_RED / time;
+      double angle_2_speed = delta_phi*MAGIC_NUMBER_RED / time;
       for(int t = 0; t <= time; t+=TIME_ITERATION) { 
 	      // iterates over TIME_ITERATION miliseconds 
 	      servo1.write(angle1); // moves motor to theta
@@ -50,11 +51,11 @@ class SphericalGear {
 void openclaw (Servo clawmotor, int open_angle) { 
   //takes parameter servo and angle to which the claw should open
   //turn the motor 45 degrees
-  clawmotor.write(open_angle);
+  clawmotor.write(open_angle*MAGIC_NUMBER_BLACK);
   delay(CLAW_DELAY);
 }
 void closeclaw (Servo clawmotor, int close_angle) {
   //close the motor
-  clawmotor.write(close_angle);
+  clawmotor.write(close_angle*MAGIC_NUMBER_BLACK);
   delay(CLAW_DELAY);
 }
