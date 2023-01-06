@@ -53,6 +53,6 @@ void openclaw (Servo clawmotor, int open_angle) {
 }
 void closeclaw (Servo clawmotor, int close_angle) {
   //close the motor
-  clawmotor.write(close_angle);
+  clawmotor.write(close_angle*MAGIC_NUMBER_BLACK);
   delay(CLAW_DELAY);
 }
